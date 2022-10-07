@@ -70,6 +70,6 @@ def send_mail(recipient, name_to_display, from_email, password, body, subj):
             mailserver.sendmail(from_email, email, msg.as_string())
             mailserver.quit()
     #==========================================================================================
-    # How many email sent and from which by using and total of email sent
+        # How many email sent and from which by using and total of email sent
         print(f"send to {email} by {from_email} successfully : {totalSend}")
     #==================================================================================================
