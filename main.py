@@ -4,6 +4,7 @@
 import sys
 import os
 import csv
+import time
 import smtplib
 from cgitb import html
 from email import message
@@ -58,18 +59,24 @@ def send_mail(recipient, name_to_display, from_email, password, body, subj):
     #==================================================================================================
     # Mail Program of Email Sending 
     #==========================================================================================
-    with open("smtp-settings.csv") as file:
-        reader = csv.reader(file)
-        next(reader)
-        for domain, port in reader:
-            mailserver = smtplib.SMTP(domain, port)
-            mailserver.ehlo()
-            mailserver.starttls()
-            mailserver.ehlo()
-            mailserver.login(from_email, password)
-            mailserver.sendmail(from_email, email, msg.as_string())
-            mailserver.quit()
-    #==========================================================================================
-        # How many email sent and from which by using and total of email sent
-        print(f"send to {email} by {from_email} successfully : {totalSend}")
-    #==================================================================================================
+    try:
+        with open("smtp-settings.csv") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for domain, port in reader:
+                mailserver = smtplib.SMTP(domain, port)
+                mailserver.ehlo()
+                mailserver.starttls()
+                mailserver.ehlo()
+                mailserver.login(from_email, password)
+                mailserver.sendmail(from_email, email, msg.as_string())
+                mailserver.quit()
+                # How many email sent and from which by using and total of email sent
+                print(f"send to {email} by {from_email} successfully : {totalSend}")
+    except Exception as e:
+        print(" [+] Sorry We have found some issue With SMTP Please Check : ) ")
+    #==============================================================================================
+send_mail() 
+#==================================================================================================
+# This is The Final Here...
+#==================================================================================================
