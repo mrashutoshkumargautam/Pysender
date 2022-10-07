@@ -46,11 +46,11 @@ def send_mail(recipient, name_to_display, from_email, password, body, subj):
     msg['Subject'] = subj
     msg['From'] = f'{name_to_display} <{from_email}>'
     msg['To'] = recipient
-#==================================================================================================
-# Main Def Logic Brack
-#==================================================================================================
-# Mail Program of Email Sending 
-#==========================================================================================
+    #==================================================================================================
+    # Main Def Logic Brack
+    #==================================================================================================
+    # Mail Program of Email Sending 
+    #==========================================================================================
     with open("smtp-settings.csv") as file:
         reader = csv.reader(file)
         next(reader)
@@ -59,8 +59,8 @@ def send_mail(recipient, name_to_display, from_email, password, body, subj):
             mailserver.ehlo()
             mailserver.starttls()
             mailserver.ehlo()
-            mailserver.login(emailId, password)
-            mailserver.sendmail(emailId, email, msg.as_string())
+            mailserver.login(from_email, password)
+            mailserver.sendmail(from_email, email, msg.as_string())
             mailserver.quit()
 #==========================================================================================
 #==================================================================================================
